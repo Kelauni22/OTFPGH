@@ -6,10 +6,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <div>
-      <input id="address" type="textbox" value="Pittsburgh, PA">
-      <button value="Encode" onclick="codeAddress()">Enter Address</button>
-    </div>
+    
 
     <!-- all necessary script dependencies -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVZMMf6C3RJEBHg-HE-_QN1lDsEGgfINU&callback=initMap"
@@ -30,19 +27,7 @@
           center: pittsburgh,
           zoom: 10
         });
-        function codeAddress() {
-    var address = document.getElementById('address').value;
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == 'OK') {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
+
   }
         /*OLD CODE WITH MY OWN LOGIC LOL
          //Populate the locations array with the latitude and longitude of all
