@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="map"></div>
-    
+
 
     <!-- all necessary script dependencies -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVZMMf6C3RJEBHg-HE-_QN1lDsEGgfINU&callback=initMap"
@@ -27,7 +27,25 @@
           center: pittsburgh,
           zoom: 10
         });
+        //https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY
+        //AJAX call to geocode
+        //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
+        var apiKey = 'AIzaSyAVZMMf6C3RJEBHg-HE-_QN1lDsEGgfINU';
+const url = 'https://www.googleapis.com/urlshortener/v1/url';
 
+const $inputField = $('#input');
+const $expandButton = $('#expand');
+const $shortenButton = $('#shorten');
+const $responseField = $('#responseField');
+
+// AJAX functions
+
+function expandUrl() {
+  const urlToExpand = url + '?shortUrl=' + $inputField.val() + '&key=' + apiKey;
+  $.getJSON(urlToExpand, response => {
+  $responseField.append('<p>Your expanded url is: </p><p>' + response.longUrl + '</p>');
+});
+}
   }
         /*OLD CODE WITH MY OWN LOGIC LOL
          //Populate the locations array with the latitude and longitude of all
