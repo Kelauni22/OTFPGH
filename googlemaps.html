@@ -29,22 +29,21 @@
         });
         //https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY
         //AJAX call to geocode
-        //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
         var apiKey = 'AIzaSyAVZMMf6C3RJEBHg-HE-_QN1lDsEGgfINU';
-const url = 'https://www.googleapis.com/urlshortener/v1/url';
+        var apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key' + apiKey;
 
-const $inputField = $('#input');
-const $expandButton = $('#expand');
-const $shortenButton = $('#shorten');
-const $responseField = $('#responseField');
-
-// AJAX functions
-
-function expandUrl() {
-  const urlToExpand = url + '?shortUrl=' + $inputField.val() + '&key=' + apiKey;
-  $.getJSON(urlToExpand, response => {
-  $responseField.append('<p>Your expanded url is: </p><p>' + response.longUrl + '</p>');
-});
+        function markerlocation(address){
+    y = 0;
+    $.getJSON(apiUrl ,function (data) {
+        var addresslocation = data.results[0].geometry.location;
+        var latlng = new google.maps.LatLng(addresslocation.lat, addresslocation.lng);
+        var marker = new google.maps.Marker({
+            position: latlng, //it will place marker based on the addresses, which they will be translated as geolocations.
+            map: map,
+            title: organization,
+            animation: google.maps.Animation.DROP,
+            id: organizationid
+        });
 }
   }
         /*OLD CODE WITH MY OWN LOGIC LOL
