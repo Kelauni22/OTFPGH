@@ -1,0 +1,23 @@
+/*
+html{
+  position: relative;
+}
+
+div {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  background-color: blue;
+  margin-left: 45%;
+  top: 300px;
+}
+*/
+
+#map {
+    height: 100%;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }

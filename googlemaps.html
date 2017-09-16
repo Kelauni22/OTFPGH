@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Off the Floor PGH</title>
+    <link href="googlemaps.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      //Project name: OffTheFloorPGH
+      var map;
+      function initMap() {
+        // Create a map object and specify the DOM element for display.
+        var pittsburgh = {lat: 40.45, lng:-79.99};
+        var home = new google.maps.LatLng(40.451791, -80.019235)
+        var pgh_map = new google.maps.Map(document.getElementById('map'), {
+          center: pittsburgh,
+          zoom: 10
+        });
+        var marker = new google.maps.Marker({
+          position: home,
+          title:"Home",
+          visible: true,
+          map: pgh_map
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVZMMf6C3RJEBHg-HE-_QN1lDsEGgfINU&callback=initMap"
+    async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </body>
+</html>
