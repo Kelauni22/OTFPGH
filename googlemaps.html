@@ -27,25 +27,20 @@
           center: pittsburgh,
           zoom: 10
         });
-        //https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY
-        //AJAX call to geocode
-        var apiKey = 'AIzaSyAVZMMf6C3RJEBHg-HE-_QN1lDsEGgfINU';
-        var apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key' + apiKey;
-
-        function markerlocation(address){
-    y = 0;
-    $.getJSON(apiUrl ,function (data) {
-        var addresslocation = data.results[0].geometry.location;
-        var latlng = new google.maps.LatLng(addresslocation.lat, addresslocation.lng);
-        var marker = new google.maps.Marker({
-            position: latlng, //it will place marker based on the addresses, which they will be translated as geolocations.
-            map: map,
-            title: organization,
-            animation: google.maps.Animation.DROP,
-            id: organizationid
-        });
-}
-  }
+        
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': address }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            var vaddressLocation = results[0].geometry.location;
+            var latlng = new google.maps.LatLng(addresslocation.lat, addresslocation.lng);
+            var marker = new google.maps.Marker({
+              map: pgh_map,
+              position: latlng
+            });
+          }
+        }
+      );
+    }
         /*OLD CODE WITH MY OWN LOGIC LOL
          //Populate the locations array with the latitude and longitude of all
          //address types
