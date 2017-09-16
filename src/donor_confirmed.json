@@ -1,0 +1,19 @@
+var donor_yes = {
+  "clients": [
+    {"first_name": "Kelli",
+      "last_name": "Cook",
+     "address": "753 E Warrington Ave, Pittsburgh, PA 15210",
+     "phone": "708-404-4692"
+     },
+     {"first_name": "Charmene",
+       "last_name": "Cook",
+      "address": "1301 E Carson St, Pittsburgh, PA 15203",
+      "phone": "708-404-4692"
+    },
+    {"first_name": "John",
+      "last_name": "Legend",
+     "address": "422 Foreland St, Pittsburgh, PA 15212",
+     "phone": "708-404-4692"
+    }
+  ]
+}

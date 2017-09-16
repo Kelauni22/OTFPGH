@@ -1,0 +1,19 @@
+var donor_no = {
+  "clients": [
+    {"first_name": "Upendo",
+      "last_name": "Skywalker",
+     "address": "5234 Scenery Dr, Pittsburgh, PA 15236",
+     "phone": "708-404-4692"
+     },
+     {"first_name": "Matt",
+       "last_name": "The Maven",
+      "address": "1220 Termon Ave, Pittsburgh, PA 15212",
+      "phone": "708-404-4692"
+    },
+    {"first_name": "Kenny",
+      "last_name": "Cook",
+     "address": "5301 Grove Rd # 1, Pittsburgh, PA 15236",
+     "phone": "708-404-4692"
+    }
+  ]
+}

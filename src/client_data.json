@@ -1,0 +1,19 @@
+var client_data = {
+  "clients": [
+    {"first_name": "Kelauni",
+      "last_name": "Cook",
+     "address": "2000 Spring St, Pittsburgh, PA 15210",
+     "phone": "708-404-4692"
+     },
+     {"first_name": "Josh",
+       "last_name": "Lucas",
+      "address": "744 E Warrington Ave, Pittsburgh, PA 15210",
+      "phone": "708-404-4692"
+    },
+    {"first_name": "Bob",
+      "last_name": "Builder",
+     "address": "901 Allegheny Ave, Pittsburgh, PA 15233",
+     "phone": "708-404-4692"
+    }
+  ]
+}
