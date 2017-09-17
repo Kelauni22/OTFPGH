@@ -46,8 +46,8 @@
               }
             });
           }
-          //turns furniture_list array into a string to use in info window
-          var furniture_list = client_data.furniture_list.join(",")
+          //run furniture_list function to get the furniture list for content below
+          furniture_list(item)
           //entire string that will go in each info window
           var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
@@ -65,17 +65,26 @@
             '</div>'+
             '</div>';
           //puts the content string into the info window
-          var infowindow = new google.maps.InfoWindow({
+          var infoWindow = new google.maps.InfoWindow({
             content: contentString
           });
           //when user clicks the marker, the infor window w/ content will open
           item.marker.addListener('click', function() {
-            infowindow.open(pgh_map, item.marker);
+            infoWindow.open(pgh_map, item.marker);
           });
         }
         //cycle through all client data to display everything on the map
         for (var i = 0; i < client_data.length; i++){
           all_markers(client_data[i]);
+        }
+        //turns furniture_list array into a string to use in info window
+        function furniture_list(item){
+          if item.furniture_list !== null {
+            var furniture_list = item.furniture_list.join()
+          } else {
+            var furniture_list = ''
+          }
+          return furniture_list
         }
        /*
 
