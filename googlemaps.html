@@ -34,10 +34,12 @@
             if (status == google.maps.GeocoderStatus.OK){
               var addressLocation = results[0].geometry.location;
               //client_markers_array.push(latlng)
+              var pinImage = new google.maps.MarkerImage('./images/blue-dot.png');
               item.marker = new google.maps.Marker({
                 position: addressLocation,
                 map: pgh_map,
-                animation: google.maps.Animation.DROP
+                animation: google.maps.Animation.DROP,
+                icon:pinImage
             });
             }
           });
