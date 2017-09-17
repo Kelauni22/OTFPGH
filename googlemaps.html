@@ -27,48 +27,33 @@
           center: pittsburgh,
           zoom: 10
         });
-        
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'address': address }, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            var vaddressLocation = results[0].geometry.location;
-            var latlng = new google.maps.LatLng(addresslocation.lat, addresslocation.lng);
-            var marker = new google.maps.Marker({
-              map: pgh_map,
-              position: latlng
-            });
-          }
+        //Loop through the client addresses in json file and turn each one into a
+        //latitude and longitude. Push each one into an array
+        var client_markers_array = [];
+        for (var i = 0; i <client_data.length; i++){
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ 'address': client_data[i].address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              var addressLocation = results[0].geometry.location;
+              var latlng = new google.maps.LatLng(addressLocation.lat, addressLocation.lng);
+              client_markers_array.push(latlng)
+            }
+          });
         }
-      );
+          //loop through the array of latitudes and longitudes for each client_markers
+          //display each one as a marker on the map
+          var client_markers = client_markers_array.map(function(latlng) {
+            return new google.maps.Marker({
+              position: latlng,
+              map: pgh_map,
+              animation: google.maps.Animation.DROP
+          });
+        }
+      )
     }
-        /*OLD CODE WITH MY OWN LOGIC LOL
-         //Populate the locations array with the latitude and longitude of all
-         //address types
-        var client_locations = [
-           {lat: ${latitude}, lng: ${longitude}}]
-        var donor_no_locations = [
-          {lat: ${latitude}, lng: ${longitude}}]
-        var donor_yes_locations = [
-          {lat: ${latitude}, lng: ${longitude}}]
-          // Add some markers to the map.
-        var client_markers = client_locations.map(function(location) {
-          return new google.maps.Marker({
-            position: location
-            map: pgh_map
-          });
-        var client_markers = donor_no_locations.map(function(location) {
-          return new google.maps.Marker({
-            position: location
-            map: pgh_map
-          });
-        var client_markers = donor_yes_locations.map(function(location) {
-          return new google.maps.Marker({
-            position: location
-            map: pgh_map
-          });
-        });
 
-          // Add a marker clusterer to manage the markers.
+
+          /*// Add a marker clusterer to manage the markers.
           var markerCluster = new MarkerClusterer(map, markers,
               {imagePath: './images/m'});
         }
