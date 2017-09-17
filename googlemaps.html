@@ -27,33 +27,40 @@
           center: pittsburgh,
           zoom: 10
         });
-        //Loop through the client addresses in json file and turn each one into a
-        //latitude and longitude. Push each one into an array
-        var client_markers_array = [];
-        for (var i = 0; i <client_data.length; i++){
+
+        function geocode(item) {
           var geocoder = new google.maps.Geocoder();
           geocoder.geocode({ 'address': client_data[i].address }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
+            if (status == google.maps.GeocoderStatus.OK){
               var addressLocation = results[0].geometry.location;
-              var latlng = new google.maps.LatLng(addressLocation.lat, addressLocation.lng);
-              client_markers_array.push(latlng)
+              //client_markers_array.push(latlng)
+              item.marker = new google.maps.Marker({
+                position: addressLocation,
+                map: pgh_map,
+                animation: google.maps.Animation.DROP
+            });
             }
           });
         }
+        //Loop through the client addresses in json file and turn each one into a
+        //latitude and longitude. Push each one into an array
+        var client_markers_array = [];
+        for (var i = 0; i < client_data.length; i++){
+          geocode(client_data[i]);
+        }
+    };
+    /*
+    var marker = new google.maps.Marker({
+    position: {lat: 40.451791,lng: -80.019235},
+    map: pgh_map
+  });
+
           //loop through the array of latitudes and longitudes for each client_markers
           //display each one as a marker on the map
-          var client_markers = client_markers_array.map(function(latlng) {
-            return new google.maps.Marker({
-              position: latlng,
-              map: pgh_map,
-              animation: google.maps.Animation.DROP
-          });
-        }
-      )
     }
 
 
-          /*// Add a marker clusterer to manage the markers.
+          // Add a marker clusterer to manage the markers.
           var markerCluster = new MarkerClusterer(map, markers,
               {imagePath: './images/m'});
         }
