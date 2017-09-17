@@ -1,5 +1,4 @@
-var donor_yes = {
-  "clients": [
+var donor_confirmed = [
     {"first_name": "Kelli",
       "last_name": "Cook",
      "address": "753 E Warrington Ave, Pittsburgh, PA 15210",
@@ -15,5 +14,4 @@ var donor_yes = {
      "address": "422 Foreland St, Pittsburgh, PA 15212",
      "phone": "708-404-4692"
     }
-  ]
-}
+];
