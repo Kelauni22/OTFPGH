@@ -27,56 +27,63 @@
           center: pittsburgh,
           zoom: 10
         });
-        //client_data markers
-        function geocode(item) {
-          var geocoder = new google.maps.Geocoder();
-          geocoder.geocode({ 'address': client_data[i].address }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK){
-              var addressLocation = results[0].geometry.location;
-              var pinImage = new google.maps.MarkerImage('./images/yellow-dot.png');
-              item.marker = new google.maps.Marker({
-                position: addressLocation,
-                map: pgh_map,
-                animation: google.maps.Animation.DROP,
-                icon:pinImage
+        //client_data markers for all data
+        function all_markers(item){
+          function geocode(item) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': client_data[i].address }, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK){
+                var addressLocation = results[0].geometry.location;
+                var pinImage = new google.maps.MarkerImage('./images/yellow-dot.png');
+                item.marker = new google.maps.Marker({
+                  position: addressLocation,
+                  map: pgh_map,
+                  animation: google.maps.Animation.DROP,
+                  icon:pinImage
+              });
+              }
             });
-            }
+          }
+          //function to make furniture_list
+          var furniture_list;
+          function get_furniture(client_data.furniture_list){
+            
+          }
+          var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">' + $(client_data.first_name) +
+            ' ' + $(client_data.last_name) + '</h2>'+
+            '</br>' +
+            '<div id="bodyContent">'+
+            '<p><b>Address:</b>'+$(client_data.address) + '</p>' +
+            '</br>' +
+            '<p><b>Phone:</b>'+$(client_data.phone) + '</p>' +
+            '<p><b>Phone:</b>'+$(client_data.phone_backup) + '</p>' +
+            '</br>' +
+            '<p><b>Furniture:</b>'+ $(furniture_list) + '</p>' +
+            '</div>'+
+            '</div>';
+
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
           });
+
+          item.marker.addListener('click', function() {
+            infowindow.open(pgh_map, item.marker);
+          });
+
         }
+        //cycle through all data to display everything on map
         for (var i = 0; i < client_data.length; i++){
-          geocode(client_data[i]);
+          all_markers(client_data[i]);
         }
     };
     //turn furniture array into string furniture_list
 
 
-    var contentString = '<div id="content">'+
-           '<div id="siteNotice">'+
-           '</div>'+
-           '<h2 id="firstHeading" class="firstHeading">' + $(client_data.first_name) +
-           ' ' + $(client_data.last_name) + '</h2>'+
-           '<div id="bodyContent">'+
-           '</br>' +
-           '<p><b>Address:</b>' + $(client_data.address) +'</p>' +
-           '<p><b>Phone:</b>' + $(client_data.phone) +'</p>' +
-           '<p><b>Phone:</b>' + $(client_data.phone_backup) +'</p>' +
-           '</br>' +
-           '<p><b>Furniture:</b>' + $(client_data.furniture_list) +'</p>' +
-           '</div>'+
-           '</div>';
 
-       var infowindow = new google.maps.InfoWindow({
-         content: contentString
-       });
 
-       var marker = new google.maps.Marker({
-         position: uluru,
-         map: map,
-         title: 'Uluru (Ayers Rock)'
-       });
-       marker.addListener('click', function() {
-         infowindow.open(map, marker);
-       });
      }
 
 

@@ -3,7 +3,8 @@ var client_data = [
       "last_name": "Cook",
      "address": "2000 Spring St, Pittsburgh, PA 15210",
      "phone": "708-404-4692",
-     "phone_backup": "708-681-4692"
+     "phone_backup": "708-681-4692",
+     "furniture_list": ["chair", "dresser", "TV"]
      },
      {"first_name": "Josh",
        "last_name": "Lucas",
