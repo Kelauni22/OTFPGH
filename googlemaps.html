@@ -10,7 +10,7 @@
 
     <!-- all necessary script dependencies -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVZMMf6C3RJEBHg-HE-_QN1lDsEGgfINU&callback=initMap"
-    async defer></script>
+    defer></script>
     <!--<script src="./markerclusterer.js"</script>-->
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script type="text/javascript" src="./src/client_data.json"></script>
@@ -20,7 +20,7 @@
     <!-- main script functionality for map -->
     <script type="text/javascript">
       function initMap() {
-        // Create a map object and specify the DOM element for display.
+        // Create the entire map
         var pittsburgh = {lat: 40.45, lng:-79.99};
         var home ={lat: 40.451791,lng: -80.019235};
         var pgh_map = new google.maps.Map(document.getElementById('map'), {
@@ -28,26 +28,40 @@
           zoom: 10
         });
       }
+      //turns address string to lat and long to place marker on map
+      function geocode(item) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': client_data[i].address }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK){
+            var addressLocation = results[0].geometry.location;
+            var pinImage = new google.maps.MarkerImage('./images/yellow-dot.png');
+            item.marker = new google.maps.Marker({
+              position: addressLocation,
+              map: pgh_map,
+              animation: google.maps.Animation.DROP,
+              icon:pinImage
+          });
+          }
+        });
+      }
+
         //entire function to display all markers with info windows
         function all_markers(item){
-          //turns address string to lat and long to place marker on map
-          function geocode(item) {
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'address': client_data[i].address }, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK){
-                var addressLocation = results[0].geometry.location;
-                var pinImage = new google.maps.MarkerImage('./images/yellow-dot.png');
-                item.marker = new google.maps.Marker({
-                  position: addressLocation,
-                  map: pgh_map,
-                  animation: google.maps.Animation.DROP,
-                  icon:pinImage
-              });
-              }
-            });
+
+          geocode(item);
+        }
+          //turns furniture_list array into a string to use in info window
+          /*
+          function furniture_list(item){
+            if item.furniture_list !== null {
+              var furniture_list = item.furniture_list.join()
+            } else {
+              var furniture_list = ''
+            }
+            return furniture_list
           }
-          //run furniture_list function to get the furniture list for content below
-          furniture_list(item)
+
+
           //entire string that will go in each info window
           var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
@@ -61,32 +75,29 @@
             '<p><b>Phone:</b>'+$(client_data.phone) + '</p>' +
             '<p><b>Phone:</b>'+$(client_data.phone_backup) + '</p>' +
             '</br>' +
-            '<p><b>Furniture:</b>'+ $(furniture_list) + '</p>' +
+            '<p><b>Furniture:</b>'+ $(client_data.furniture_list) + '</p>' +
             '</div>'+
             '</div>';
+
           //puts the content string into the info window
           var infoWindow = new google.maps.InfoWindow({
             content: contentString
           });
-          //when user clicks the marker, the infor window w/ content will open
+
+          //when user clicks the marker, the info window w/ content will open
           item.marker.addListener('click', function() {
             infoWindow.open(pgh_map, item.marker);
           });
-        }
+*/
+
         //cycle through all client data to display everything on the map
         for (var i = 0; i < client_data.length; i++){
           all_markers(client_data[i]);
         }
-        //turns furniture_list array into a string to use in info window
-        function furniture_list(item){
-          if item.furniture_list !== null {
-            var furniture_list = item.furniture_list.join()
-          } else {
-            var furniture_list = ''
-          }
-          return furniture_list
-        }
+
        /*
+
+
 
 
           // Add a marker clusterer to manage the markers.
@@ -94,6 +105,7 @@
               {imagePath: './images/m'});
         }
         */
+
     </script>
   </body>
 </html>
